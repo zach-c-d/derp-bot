@@ -67,6 +67,8 @@ void loop() {
 //      for (int i=0; i < 20; i++){
 //        fdBk(Move.bk);
 //     }
+      
+      fdBk(Move.bk);
       fdBk(Move.rt);
 //     if(random(1,2) == 1)
 //      fdBk(Move.lt);
@@ -77,10 +79,13 @@ void loop() {
 
     // Obsticle Avoidance
     int detect3 = digitalRead(OUT3);
-    int detect2 = digitalRead(OUT2);
-    int detect1 = digitalRead(OUT1);
-    
-    if(detect3 == LOW || detect2 == LOW || detect1 = LOW){
+    int detect2 = analogRead(OUT2);
+    int detect1 = analogRead(OUT1);
+    detect2 = map(detect2, 3, 20, 0, 1000);
+    detect3 = map(detect3, 1, 20, 0, 500);
+    detect1 = map(detect1, 3, 20, 0, 1000);
+    Serial.println(detect3);
+    if(detect3 <0 || detect2 >0 || detect1 >0){
         Serial.println("Obsticle");
         fdBk(Move.rt);
       }
