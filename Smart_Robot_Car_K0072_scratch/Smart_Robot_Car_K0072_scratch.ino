@@ -180,12 +180,12 @@ void loop() {
         myIR.begin();
         isTrackMode = true; isDetecte = false;
       }
-      if (serialRead == 0x08) {
-        servo_left();
-      }
-      if (serialRead == 0x09) {
-        servo_right();
-      }
+//      if (serialRead == 0x08) {
+//        servo_left();
+//      }
+//      if (serialRead == 0x09) {
+//        servo_right();
+//      }
       if (serialRead == 0x11) {
         Serial.write(0xAA);
         Serial.print("{\"version\":\"K0072\"}");
@@ -594,52 +594,52 @@ void moveTrack(void)
   }
 }
 
-void servo_right(void)
-{
-  neckControllerServoMotor.attach(10); delay(10);
-  int servotemp = neckControllerServoMotor.read();
-  servotemp -= servoStep;
-  servo_Horizontal(servotemp);
-  delay(50);
-  neckControllerServoMotor.detach();
-  delay(50);
-  myIR.begin();
-
-}
-void servo_left(void)
-{
-  neckControllerServoMotor.attach(10); delay(10);
-  int servotemp = neckControllerServoMotor.read();
-  servotemp += servoStep;
-  servo_Horizontal(servotemp);
-  delay(50);
-  neckControllerServoMotor.detach();
-  delay(50);
-  myIR.begin();
-}
-
-void servo_Horizontal(int corner)
-{
-  int i = 0;
-  byte cornerX = neckControllerServoMotor.read();
-  if (cornerX > corner) {
-    for (i = cornerX; i > corner; i = i - servoStep) {
-      \
-      neckControllerServoMotor.write(i);
-      servoXPoint = i;
-      delay(50);
-    }
-  }
-  else {
-    for (i = cornerX; i < corner; i = i + servoStep) {
-      neckControllerServoMotor.write(i);
-      servoXPoint = i;
-      delay(50);
-    }
-  }
-  neckControllerServoMotor.write(corner);
-  servoXPoint = corner;
-}
+//void servo_right(void)
+//{
+//  neckControllerServoMotor.attach(10); delay(10);
+//  int servotemp = neckControllerServoMotor.read();
+//  servotemp -= servoStep;
+//  servo_Horizontal(servotemp);
+//  delay(50);
+//  neckControllerServoMotor.detach();
+//  delay(50);
+//  myIR.begin();
+//
+//}
+//void servo_left(void)
+//{
+//  neckControllerServoMotor.attach(10); delay(10);
+//  int servotemp = neckControllerServoMotor.read();
+//  servotemp += servoStep;
+//  servo_Horizontal(servotemp);
+//  delay(50);
+//  neckControllerServoMotor.detach();
+//  delay(50);
+//  myIR.begin();
+//}
+//
+//void servo_Horizontal(int corner)
+//{
+//  int i = 0;
+//  byte cornerX = neckControllerServoMotor.read();
+//  if (cornerX > corner) {
+//    for (i = cornerX; i > corner; i = i - servoStep) {
+//      \
+//      neckControllerServoMotor.write(i);
+//      servoXPoint = i;
+//      delay(50);
+//    }
+//  }
+//  else {
+//    for (i = cornerX; i < corner; i = i + servoStep) {
+//      neckControllerServoMotor.write(i);
+//      servoXPoint = i;
+//      delay(50);
+//    }
+//  }
+//  neckControllerServoMotor.write(corner);
+//  servoXPoint = corner;
+//}
 
 
 int getUltrasonicVal(void)

@@ -9,6 +9,10 @@
 #define TRIG_PIN A2
 #define ECHO_PIN A3
 
+#define OUT3  13
+#define OUT2  A1
+#define OUT1  A0
+
 #define ULTRASONIC_SENSOR 55
 
 UC_DCMotor leftMotor1(3, MOTOR34_64KHZ);
@@ -39,6 +43,11 @@ void setup() {
   pinMode(ECHO_PIN, INPUT); //Set the connection pin output mode Echo pin
   pinMode(TRIG_PIN, OUTPUT);//Set the connection pin output mode trog pin
   
+  // Obsticle Avoidance  
+  pinMode(OUT3, INPUT);
+  pinMode(OUT2, INPUT);
+  pinMode(OUT1, INPUT);
+  
   Serial.begin(115200);
   
 
@@ -54,18 +63,37 @@ void loop() {
   Serial.println(cm);
 
   if(cm > 10){
-      fdBk(Move.st);
-      for (int i=0; i < 20; i++){
-        fdBk(Move.bk);
-     }
-     if(random(1,2) == 1)
-      fdBk(Move.lt);
-     else fdBk(Move.rt);
+//      fdBk(Move.st);
+//      for (int i=0; i < 20; i++){
+//        fdBk(Move.bk);
+//     }
+      fdBk(Move.rt);
+//     if(random(1,2) == 1)
+//      fdBk(Move.lt);
+//     else fdBk(Move.rt);
          
-  }else{
-      fdBk(Move.fd);
-        
+    }else{
+//      fdBk(Move.fd);
+
+    // Obsticle Avoidance
+    int detect3 = digitalRead(OUT3);
+    int detect2 = digitalRead(OUT2);
+    int detect1 = digitalRead(OUT1);
+    
+    if(detect3 == LOW || detect2 == LOW || detect1 = LOW){
+        Serial.println("Obsticle");
+        fdBk(Move.rt);
+      }
+      
+     else{
+        Serial.println("void");
+        fdBk(Move.fd);  
+      }
     }  
+    
+      
+    delay(300);     
+     
 }
 
 
