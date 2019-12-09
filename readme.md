@@ -1,26 +1,30 @@
 gapcheck(){
-	if(frontLineSensor != onLine)
+	if(FLLineSensor != onLine && FRLineSensor != onLine && FMLineSensor != onLine && (BLLineSensor == onLine || BRLineSensor == onLine || BMLineSensor == onLine))
 	{
-		while(backLineSensor == onLine)
-		{
-			if(frontLineSensor == onLine){
-				return true;
-			}
-			if(leftIR == onLine){
-				leftTurn = true;
-			}
-			if(rightIR == onLine){
-				rightTurn = true;
-			}
-			if(rightflameSensor == fire){
-				flameRight = true;
-			}
-			if(leftflameSensor == fire){
-				flameLeft = true;
-			}
-			delay(5 mili);
-		}
+		frontSensorOff = true;
+	}else if((FLLineSensor == onLine || FRLineSensor == onLine ||  FMLineSensor == onLine) && (BLLineSensor == onLine || BRLineSensor == onLine || BMLineSensor == onLine) && frontSensorOff){
+		frontSensorOff = false;
+		return true;
+	}else{
 		return false;
+	}
+}
+
+fireCheck(){
+	if(rightflameSensor == fire){
+		flameRight = true;
+	}
+	if(leftflameSensor == fire){
+		flameLeft = true;
+	}
+}
+
+cornerCheck(){
+	if(leftIR == onLine){
+		leftTurn = true;
+	}
+	if(rightIR == onLine){
+		rightTurn = true;
 	}
 }
 			
