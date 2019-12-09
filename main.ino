@@ -2,10 +2,42 @@
 #include <Servo.h>
 #include "Adafruit_VL53L0X.h"
 
+
+
+// Define a special note, 'R', to represent a rest
+#define  R     0
+
+//Ultrasonic for Edge Detection
+#define L_EDGE_TRIG 23 
+#define L_EDGE_ECHO A9
+#define R_EDGE_TRIG 22 
+#define R_EDGE_ECHO A8
+
+//IR Sensors for Obstacle Avoidance
+#define LEFT_IR_SENSOR 48
+#define RIGHT_IR_SENSOR 26
+//#define MiddleIRSensor A10 
+
+//Front Line Sensor
+#define LINE_LEFT 52
+#define LINE_RIGHT 51
+#define LINE_MIDDLE 53
+
+//Back Line Sensor
+#define TURN_DIST 15
+
+//Flame Sensor and IR Sensors for Flame Sensing
+#define FLAME_SENSOR A10
+#define FLAME_DETECT_LEFT A12
+#define FLAME_DETECT_RIGHT A11
+
+//#define FRONT_TRIG 52 
+//#define FRONT_ECHO A15
+
+#define SERVO_PIN 10
+
 #include "include/sensors.h"
 #include "include/actuators.h"
-
-
 
 int motor_speed = 450;
 String last_corner_turn;
