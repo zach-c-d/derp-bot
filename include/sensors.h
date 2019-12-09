@@ -12,12 +12,18 @@
 // bool check_fire_left()
 // {
 
+<<<<<<< HEAD
 // }
 // bool check_fire_right()
 // {
 
 // }
 void findFire ()
+=======
+}
+
+bool check_fire_left()
+>>>>>>> 49c9f633ecedc198317e02a86ce5512298102078
 {
   //Read sensor on analog
   //Sensor reads from 0 - 1000; 0 being closest, 1000 being farthest
@@ -64,6 +70,7 @@ void findFire ()
     delay(60);
   }
 
+<<<<<<< HEAD
   //6. If both left AND right check if off && center is GREATER THAN 100, drive forward
   if (flameDistanceReading > fireCloseDistance && flameDistanceReading < fireFarDistance)
   {
@@ -115,6 +122,13 @@ void findFire ()
     setMotorSpeed(50);
   } 
 }
+=======
+bool check_fire_right()
+{
+
+}
+
+>>>>>>> 49c9f633ecedc198317e02a86ce5512298102078
 
 bool get_left_ir_sensor(){
     return digitalRead(LEFT_IR_SENSOR);
@@ -125,7 +139,13 @@ bool get_right_ir_sensor(){
 }
 
 bool is_left_or_right_ir_sensor(){
-    return get_left_ir_sensor() || get_right_ir_sensor();
+	if(get_left_ir_sensor()){
+		leftCorner = true;
+	}
+	if(get_right_ir_sensor()){
+		rightCorner = true;
+	}
+    return leftCorner || rightCorner;
 }
 
 bool front_line_sensor(){
@@ -140,4 +160,24 @@ bool back_line_sensor(){
  
 bool is_back_or_front_line_sensor(){
     return front_line_sensor() || back_line_sensor();
+}
+
+float readPing() {
+  float value = 0.0;
+  VL53L0X_RangingMeasurementData_t measure;
+
+  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
+    Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
+    
+    Serial.println(measure.RangeStatus);
+    
+    value = (measure.RangeMilliMeter / 10);
+  } else {
+    Serial.println(" out of range ");
+    
+    Serial.println(measure.RangeStatus);
+    value = 100;
+  }
+  return value;
 }

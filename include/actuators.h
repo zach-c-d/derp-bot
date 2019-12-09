@@ -39,7 +39,7 @@ void align_with_line()
   }
 }
 
-void move_forward(int motor_speed)
+void move_forward()
 {
   motorFL.run(FORWARD); motorFR.run(FORWARD);
   motorBL.run(FORWARD); motorBR.run(FORWARD);
