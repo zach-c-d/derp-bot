@@ -8,13 +8,8 @@
 int motor_speed = 450;
 String last_corner_turn;
 
-void setup()
-{
 
-}
-
-void loop()
-{
+void navigate(){
   //make sure dis bot is frickin aligned!!!
   //do not leave this function until you very very sure!
   align_with_line();
@@ -24,14 +19,24 @@ void loop()
   //when break in line is found
   if(break_in_line())
   {
-    //check to see if its de corner
-    if(break_is_corner())
+    //check to see if its de t-corner
+    if(break_is_t_corner())
     {
       turn_corner(last_corner_turn);
     }
-    //if break is not corner, it must be a ball container
+    //else, check to see if it's a regular old corner
+    else if(break_is_corner())
+    {
+
+    }
+    //else it must be a ball container
     else
     {
+      if (check_if_fire()){
+        //a fire at a containment! It must be the ball!
+        //engage ball retrieve!!
+        ball_retrieve = true;
+      }
       //check to see if there is a candle lit in the ball containment area
       if(check_fire_right())
       {
@@ -39,8 +44,25 @@ void loop()
       }
       else if(check_fire_left())
       {
-        
+
       }
     }
+  }
+}
+
+void setup()
+{
+
+}
+
+void loop()
+{
+  if(_navigate == true)
+  {
+    navigate();
+  }
+  else if (_retrieve == true)
+  {
+    retrieve();
   }
 }
