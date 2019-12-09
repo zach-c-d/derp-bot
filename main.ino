@@ -52,6 +52,11 @@
 int motor_speed = 450;
 String last_corner_turn;
 
+//state statuses
+bool _navigate = false;
+bool _retrieve = false;
+bool _deliver = false;
+
 
 void navigate(){
   //make sure dis bot is frickin aligned!!!
@@ -74,7 +79,7 @@ void navigate(){
     //else, check to see if it's a regular old corner
     else if(break_is_corner())
     {
-
+      
     }
     //else it must be a ball container
     else
@@ -89,6 +94,11 @@ void navigate(){
   }
 }
 
+void retrieve()
+{
+  //rotate bot 
+}
+
 void setup()
 {
 
@@ -96,6 +106,11 @@ void setup()
 
 void loop()
 {
+  //if all states are false, begin with navigate state again
+  if (_navigate == false && _retrieve == false && _deliver == false)
+  {
+    _navigate = true;
+  }
   if(_navigate == true)
   {
     navigate();
@@ -103,5 +118,13 @@ void loop()
   else if (_retrieve == true)
   {
     retrieve();
+  }
+  else if (_deliver == true)
+  {
+    deliver();
+  }
+  else
+  {
+    Serial.println("No State set you doofus!");
   }
 }
