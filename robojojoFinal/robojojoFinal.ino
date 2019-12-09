@@ -464,6 +464,54 @@ void lineGapCheck(void)
    
 }
 
+
+void turnLogic(void){
+// 0---0-----0-----0---0
+// |         |         |  
+// | |_|_|_| | |_|_|_| |              
+// | | | | | | | | | | |       R:ROBOT  
+// |         |         | 
+// 0---0-----0-----0---0                
+// |         |         |
+// | |_|_|_| | |_|_|_| | FL|FM|FR       
+// | | | | | | | | | | |    ***
+// |         |         |    
+// R---0-----0-----0---0    ***
+//                       BL|BM|BR   
+
+    // ROBOT STRAIGHT 
+    // TURN AT T-CORNER
+        // ----> RIGHT 
+                // -------> STRAIGHT ----> LEFT 
+                //
+                //              TURN  ON CORNER            
+                //
+        // ----> LEFT 
+                // -------> STRAIGHT ----> RIGHT
+    if(t_corner)
+        if(left_ir_sensor){
+            turnRight();
+            while(!cornerFound())
+                if(back_line_track_sensor)
+                    goStraight();
+                else 
+                    alignRobot();
+            turnLeft();
+        }
+        else{
+            turnLeft();
+            while(!cornerFound())
+                if(back_line_track_sensor)
+                    goStraight();
+                else 
+                    alignRobot();
+            turnRight();
+
+        }                    
+    else
+        goStraight();
+}
+
 void setMotorSpeed(int mSpeed){
    motorFL.setSpeed(mSpeed);
    motorFR.setSpeed(mSpeed);
