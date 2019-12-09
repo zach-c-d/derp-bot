@@ -1,4 +1,8 @@
-bool check_for_fire()
+bool check_fire()
+{
+  
+}
+bool check_fire_left()
 {
 
 }
