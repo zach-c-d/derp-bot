@@ -121,7 +121,7 @@ bool break_in_line()
           //and if front detects gap
           if (digitalRead(FR_LINE_TRACKER_L) == 1 &&
               digitalRead(FR_LINE_TRACKER_M) == 1 &&
-              digitalRead(FR_LINE_TRACKER_R) == 1) )
+              digitalRead(FR_LINE_TRACKER_R) == 1) 
               {
                 return true;
               }
@@ -143,11 +143,12 @@ bool break_is_t_corner()
 {
   if(break_in_line() && is_left_or_right_ir_sensor())
     return true;
-  else 
-    return false;
+  return false;
 }
 
 bool break_is_corner()
 {
-  return true;
+  if(break_in_line() && !back_line_sensor() && front_line_sensor() && get_left_ir_sensor())
+      return true;
+  return false;
 }

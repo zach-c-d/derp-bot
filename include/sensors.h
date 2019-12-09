@@ -22,11 +22,12 @@ bool is_left_or_right_ir_sensor(){
 
 bool front_line_sensor(){
 
+    return digitalRead(FR_LINE_TRACKER_L) || digitalRead(FR_LINE_TRACKER_M) || digitalRead(FR_LINE_TRACKER_R);
 
 }
 
 bool back_line_sensor(){
-
+    return digitalRead(BK_LINE_TRACKER_L) || digitalRead(BK_LINE_TRACKER_M) || digitalRead(BK_LINE_TRACKER_R);
 }
  
 bool is_back_or_front_line_sensor(){
