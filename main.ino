@@ -1,10 +1,11 @@
 #include <AFMotor.h>
 #include <Servo.h>
 #include "Adafruit_VL53L0X.h"
+
 #include "include/sensors.h"
 #include "include/actuators.h"
 
-//
+
 
 int motor_speed = 450;
 String last_corner_turn;
@@ -25,7 +26,7 @@ void navigate(){
     {
       //if last turn was left, go right. else go left
       //if can't go left, go right
-      //if can't go left, go right
+      //if can't go right, go left
       turn_corner(if_last_turn_left);
     }
     //else, check to see if it's a regular old corner
@@ -36,7 +37,7 @@ void navigate(){
     //else it must be a ball container
     else
     {
-      if (check_for_fire()){
+      if (check_fire()){
         //a fire at a containment! It must be the ball!
         //engage ball retrieve!!
         ball_retrieve = true;
