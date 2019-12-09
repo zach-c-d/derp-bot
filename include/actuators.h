@@ -44,7 +44,10 @@ bool break_in_line()
 
 bool break_is_t_corner()
 {
-  return true;
+  if(is_left_or_right_ir_sensor() && is_back_or_front_line_sensor())
+    return true;
+  else 
+    return false;
 }
 
 bool break_is_corner()

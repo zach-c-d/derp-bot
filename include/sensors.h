@@ -18,6 +18,10 @@ bool get_right_ir_sensor(){
 
 }
 
+bool is_left_or_right_ir_sensor(){
+    return get_left_ir_sensor() || get_right_ir_sensor();
+}
+
 bool front_line_sensor(){
 
 
@@ -25,4 +29,8 @@ bool front_line_sensor(){
 
 bool back_line_sensor(){
 
+}
+ 
+bool is_back_or_front_line_sensor(){
+    return front_line_sensor() || back_line_sensor();
 }
