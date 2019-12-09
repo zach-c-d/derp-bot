@@ -1,9 +1,9 @@
 gapcheck(){
-	if(frontLineTrack != onLine)
+	if(frontLineSensor != onLine)
 	{
-		while(backLineTrack == onLine)
+		while(backLineSensor == onLine)
 		{
-			if(frontLineTrack == onLine){
+			if(frontLineSensor == onLine){
 				return true;
 			}
 			if(leftIR == onLine){
@@ -12,7 +12,13 @@ gapcheck(){
 			if(rightIR == onLine){
 				rightTurn = true;
 			}
-			delay(10 milli);
+			if(rightflameSensor == fire){
+				flameRight = true;
+			}
+			if(leftflameSensor == fire){
+				flameLeft = true;
+			}
+			delay(5 mili);
 		}
 		return false;
 	}
