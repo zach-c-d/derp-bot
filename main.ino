@@ -24,6 +24,7 @@ void loop()
   //when break in line is found
   if(break_in_line())
   {
+    //check to see if its de corner
     if(break_is_corner())
     {
       turn_corner(last_corner_turn);
@@ -32,6 +33,14 @@ void loop()
     else
     {
       //check to see if there is a candle lit in the ball containment area
+      if(check_fire_right())
+      {
+
+      }
+      else if(check_fire_left())
+      {
+        
+      }
     }
   }
 }
