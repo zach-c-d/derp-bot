@@ -1,10 +1,10 @@
 void align_with_line()
 {
-  int temp = 0, num1 = 0, num2 = 0, num3 = 0 num4 = 0, num5 = 0, num6 = 0;
+  int temp = 0, num1 = 0, num2 = 0, num3 = 0, num4 = 0, num5 = 0, num6 = 0;
   
-  num1 = digitalRead(lineLeft);
-  num2 = digitalRead(lineMiddle);
-  num3 = digitalRead(lineRight);
+  num1 = digitalRead(FR_LINE_TRACKER_L);
+  num2 = digitalRead(FR_LINE_TRACKER_M);
+  num3 = digitalRead(FR_LINE_TRACKER_R);
   num4 = digitalRead(BK_LINE_TRACKER_L);
   num5 = digitalRead(BK_LINE_TRACKER_M);
   num6 = digitalRead(BK_LINE_TRACKER_R);
@@ -41,8 +41,8 @@ void align_with_line()
 
 void move_forward(int motor_speed)
 {
-    motorFL.run(FORWARD); motorFR.run(FORWARD);
-    motorBL.run(FORWARD); motorBR.run(FORWARD);
+  motorFL.run(FORWARD); motorFR.run(FORWARD);
+  motorBL.run(FORWARD); motorBR.run(FORWARD);
 	setMotorSpeed(170);
 	delay(15);
 	setMotorSpeed(60);
@@ -52,14 +52,14 @@ void move_forward(int motor_speed)
 
 void slightLeft(){
 	motorFL.run(BACKWARD); motorFR.run(FORWARD); // TURN LEFT
-    motorBL.run(BACKWARD); motorBR.run(FORWARD);
+  motorBL.run(BACKWARD); motorBR.run(FORWARD);
 	delay(10);
 	
 }
 
 void slightRight()){
 	motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
-    motorBL.run(FORWARD); motorBR.run(BACKWARD);
+  motorBL.run(FORWARD); motorBR.run(BACKWARD);
 	delay(10);
 }
 

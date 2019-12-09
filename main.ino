@@ -3,7 +3,6 @@
 #include "Adafruit_VL53L0X.h"
 
 
-
 // Define a special note, 'R', to represent a rest
 #define  R     0
 
@@ -84,11 +83,14 @@ void navigate(){
     //else it must be a ball container
     else
     {
+      findFire();
+      /*
       if (check_fire()){
         //a fire at a containment! It must be the ball!
         //engage ball retrieve!!
         ball_retrieve = true;
       }
+      */
 
     }
   }
