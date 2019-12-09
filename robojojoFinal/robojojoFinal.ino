@@ -488,7 +488,7 @@ void turnLogic(void){
                 //
         // ----> LEFT 
                 // -------> STRAIGHT ----> RIGHT
-    if(t_corner)
+    if(break_is_t_corner())
         if(left_ir_sensor){
             turnRight();
             while(!cornerFound())
