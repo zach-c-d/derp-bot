@@ -126,14 +126,6 @@ void setup() {
   }
    
 
-   //Object detection Ultrasonic setup
-//   pinMode(FRONT_ECHO, INPUT); 
-//   pinMode(FRONT_TRIG, OUTPUT);
-
-   //Object Detection IR setup
-//   pinMode(LeftIRSensor, INPUT);
-//   pinMode(RightIRSensor, INPUT);
-//   pinMode(MiddleIRSensor, INPUT)+
 
 
 ;
@@ -145,25 +137,6 @@ void setup() {
   
    setMotorSpeed(150);
 
-//  tone(50, D);
-//  delay(200);
-//  tone(50, F);
-//  delay(200);
-//  tone(50, a);
-//  delay(200);
-//  tone(50, G);
-//  delay(200);
-//  tone(50, E);
-//  delay(200);
-//  tone(50, D, 400);
-   /*
-      Serial.print("left sensor: ");
-      Serial.println(readLeftSensor());
-      Serial.print("right sensor: ");
-      Serial.println(readRightSensor());
-      Serial.print("front sensor: ");
-      Serial.println(readPing());
-      */
 }
 
 void loop() {
@@ -230,13 +203,6 @@ void backupAndTurn()
 {
     stopp();
     setMotorSpeed(150);
-  //Needs to stop, backup and then turn
-  //SHit needs consistency
-  //turns are too large (any way to change) 
-  //Backup
-//  leftMotor1.run(5); motorFL.run(5);//5-> stop
-//  motorBR.run(5); motorBL.run(5);
-//  delay(400);
     
   if(lastTurn < millis()){
     
@@ -246,13 +212,6 @@ void backupAndTurn()
     setMotorSpeed(70);
     delay(10);
   }
-//   //Stop moving
-//   motorFR.run(5); motorFL.run(5);//5-> stop
-//  motorBR.run(5); motorBL.run(5);
-//  motorFR.setSpeed(0); motorFL.setSpeed(0);
-//  motorBR.setSpeed(0); motorBL.setSpeed(0);
-  //neckControllerServoMotor.write(150);
-//  delay(300);
     backward();
     setMotorSpeed(150);
     delay(15);
@@ -288,16 +247,6 @@ void turn() {
     leftDetect = digitalRead(LeftIRSensor);
     delay(5);
   }
-//  while(middleDetect > 0){
-//    
-//    motorFL.run(BACKWARD); motorFR.run(BACKWARD);
-//    motorBL.run(BACKWARD); motorBR.run(BACKWARD);
-//    delay(5);
-//    motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
-//    motorBL.run(FORWARD); motorBR.run(BACKWARD);
-//    middleDetect = readIRmiddle();
-//    delay(5);
-//  }
   while(rightDetect == 0){
     
     backward();
@@ -366,91 +315,25 @@ void moveTrack(void)
   num1 = digitalRead(lineLeft);
   num2 = digitalRead(lineMiddle);
   num3 = digitalRead(lineRight);
-//  Serial.print("left line: ");
-//  Serial.println(num1);
-//  Serial.print("middle line: ");
-//  Serial.println(num2);
-//  Serial.print("right line: ");
-//  Serial.println(num3);
-
-  if ((num2 == 0)) {
-//    num1 = digitalRead(lineLeft);
-//    num2 = digitalRead(lineMiddle);
-//    num3 = digitalRead(lineRight);
-//    if ((num2 == 0) && (num1 == 0) && (num3 == 0)) {
-//      leftMotor1.run(5); rightMotor1.run(5);//5-> stop
-//      leftMotor2.run(5); rightMotor2.run(5);
-//      leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
-//      leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
-//      continue;
-//    } else 
+  
+if ((num2 == 0)) {
     if ( (num1 == 0) && num3 == 1) { //leaning right
       turnLeft();
       delay(40);
       stopp();
       
-//      while (1) {
-//        num2 = digitalRead(lineMiddle);
-//        if (num2) {
-//          motorFL.run(RELEASE); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(RELEASE); motorBR.run(FORWARD);
-//          continue;
-//        }else{
-//          motorFL.run(FORWARD); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(FORWARD); motorBR.run(FORWARD);
-//          break;
-//        }
-//      }
     } else if ((num3 == 0) && (num1 == 1)) { // leaning left
       turnRight();
       delay(40);
       stopp();
-//      while (1) {
-//        num2 = digitalRead(lineMiddle);
-//        if (num2) {
-//          motorFL.run(FORWARD); motorFR.run(RELEASE); // TURN RIGHT
-//          motorBL.run(FORWARD); motorBR.run(RELEASE);
-//          continue;
-//        }else{
-//          motorFL.run(FORWARD); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(FORWARD); motorBR.run(FORWARD);
-//          break;
-//        }
-//      }
     }
-//    motorFL.run(FORWARD); motorFR.run(FORWARD);
-//    motorBL.run(FORWARD); motorBR.run(FORWARD);
   } else if(num1 == 0 || num3 == 0){
     if ( (num1 == 1) && num3 == 0) { //line is right
       turnRight();
-//      while (1) {
-//        num2 = digitalRead(lineMiddle);
-//        if (num2) {
-//          motorFL.run(RELEASE); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(RELEASE); motorBR.run(FORWARD);
-//          continue;
-//        }else{
-//          motorFL.run(FORWARD); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(FORWARD); motorBR.run(FORWARD);
-//          break;
-//        }
-//      }
       delay(20);
       stopp();
     } else if ((num3 == 1) && (num1 == 0)) { // line is left
       turnLeft();
-//      while (1) {
-//        num2 = digitalRead(lineMiddle);
-//        if (num2) {
-//          motorFL.run(FORWARD); motorFR.run(RELEASE); // TURN RIGHT
-//          motorBL.run(FORWARD); motorBR.run(RELEASE);
-//          continue;
-//        }else{
-//          motorFL.run(FORWARD); motorFR.run(FORWARD); // TURN LEFT
-//          motorBL.run(FORWARD); motorBR.run(FORWARD);
-//          break;
-//        }
-//      }
       delay(20);
       stopp();
     }
