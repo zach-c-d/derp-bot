@@ -560,9 +560,25 @@ void findFire (void)
   
 }
 
-void bitchImOnLine(void)
+void lineGapCheck(void)
 {
-  
+//  FCL        FCR
+  //  *          *
+  //       FLT
+  //    FL|FM|FR       
+  //       ***
+  //     
+  //       ***
+  //    BL|BM|BR
+  //       BLT
+  //  *          *
+  // BCL        BCR
+
+  // (FCL && (FLT || BLT)) --> LCorner
+  // (FCR && (FLT || BLT)) --> RCorner
+  // (!FLT && BLT) --> FGap
+  // (FLT && !BLT) --> BGap
+   
 }
 
 void setMotorSpeed(int mSpeed){
