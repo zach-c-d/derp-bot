@@ -11,12 +11,75 @@
 
 void align_with_line()
 {
+<<<<<<< HEAD
 
+=======
+  int temp = 0, num1 = 0, num2 = 0, num3 = 0 num4 = 0, num5 = 0, num6 = 0;
+  
+  num1 = digitalRead(lineLeft);
+  num2 = digitalRead(lineMiddle);
+  num3 = digitalRead(lineRight);
+  num4 = digitalRead(BK_LINE_TRACKER_L);
+  num5 = digitalRead(BK_LINE_TRACKER_M);
+  num6 = digitalRead(BK_LINE_TRACKER_R);
+  
+  if ((num2 == 0 && num5 == 0)) {
+    if ( (num1 == 0) && num3 == 1) { //leaning right
+      slightLeft();
+      
+    } else if ((num3 == 0) && (num1 == 1)) { // leaning left
+      slightRight();
+    }
+  } else if(num2 == 0){
+    if ( (num1 == 0) && num3 == 1) { //leaning right
+      slightLeft();
+      
+    } else if ((num3 == 0) && (num1 == 1)) { // leaning left
+      slightRight();
+    }
+  } else if(num5 == 0){
+    if ( (num4 == 0) && num3 == 6) { //leaning right
+      slightLeft();
+      
+    } else if ((num6 == 0) && (num4 == 1)) { // leaning left
+      slightRight();
+    }
+  } else if(num1 == 0 || num3 == 0){
+    if ( (num1 == 1) && num3 == 0 && (num4 == 0 || num6 == 0) { //line is right
+      slightRight();
+    } else if ((num3 == 1) && (num1 == 0) && (num4 == 0 || num6 == 0)) { // line is left
+      slightLeft();
+    }
+  }
+>>>>>>> 35e6e4c9fc6411a019970c7f0e06486b4b17a44a
 }
 
 void move_forward(int motor_speed)
 {
+<<<<<<< HEAD
 
+=======
+    motorFL.run(FORWARD); motorFR.run(FORWARD);
+    motorBL.run(FORWARD); motorBR.run(FORWARD);
+	setMotorSpeed(170);
+	delay(15);
+	setMotorSpeed(60);
+	delay(10);
+	
+}
+
+void slightLeft(){
+	motorFL.run(BACKWARD); motorFR.run(FORWARD); // TURN LEFT
+    motorBL.run(BACKWARD); motorBR.run(FORWARD);
+	delay(10);
+	
+>>>>>>> 35e6e4c9fc6411a019970c7f0e06486b4b17a44a
+}
+
+void slightRight){
+	motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
+    motorBL.run(FORWARD); motorBR.run(BACKWARD);
+	delay(10);
 }
 
 void turn_corner(bool turn_left)
@@ -97,7 +160,10 @@ bool break_in_line()
 
 bool break_is_t_corner()
 {
-  return true;
+  if(break_in_line() && is_left_or_right_ir_sensor())
+    return true;
+  else 
+    return false;
 }
 
 bool break_is_corner()
