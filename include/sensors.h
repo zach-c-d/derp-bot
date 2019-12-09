@@ -9,13 +9,11 @@ bool check_fire_left()
 
 
 bool get_left_ir_sensor(){
-
-
+    return digitalRead(LEFT_IR_SENSOR);
 }
 
 bool get_right_ir_sensor(){
-
-
+    return digitalRead(RIGHT_IR_SENSOR);
 }
 
 bool is_left_or_right_ir_sensor(){
