@@ -1,14 +1,3 @@
-//Front Line Sensor
-#define FR_LINE_TRACKER_L 52
-#define FR_LINE_TRACKER_M 53
-#define FR_LINE_TRACKER_R 51
-
-//Back Line Sensor
-#define TURN_DIST 15
-#define BK_LINE_TRACKER_L 39
-#define BK_LINE_TRACKER_M 35
-#define BK_LINE_TRACKER_R 37
-
 void align_with_line()
 {
   int temp = 0, num1 = 0, num2 = 0, num3 = 0 num4 = 0, num5 = 0, num6 = 0;
@@ -68,7 +57,7 @@ void slightLeft(){
 	
 }
 
-void slightRight){
+void slightRight()){
 	motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
     motorBL.run(FORWARD); motorBR.run(BACKWARD);
 	delay(10);

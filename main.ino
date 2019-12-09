@@ -19,11 +19,21 @@
 //#define MiddleIRSensor A10 
 
 //Front Line Sensor
+#define FR_LINE_TRACKER_L 52
+#define FR_LINE_TRACKER_M 53
+#define FR_LINE_TRACKER_R 51
+
+//Back Line Sensor
+#define BK_LINE_TRACKER_L 39
+#define BK_LINE_TRACKER_M 35
+#define BK_LINE_TRACKER_R 37
+
+//Front Line Sensor
 #define LINE_LEFT 52
 #define LINE_RIGHT 51
 #define LINE_MIDDLE 53
 
-//Back Line Sensor
+//not sure what this is???
 #define TURN_DIST 15
 
 //Flame Sensor and IR Sensors for Flame Sensing
