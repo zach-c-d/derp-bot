@@ -50,7 +50,7 @@ void align_with_line()
   }
 }
 
-void move_forward(int motor_speed)
+void move_forward()
 {
     motorFL.run(FORWARD); motorFR.run(FORWARD);
     motorBL.run(FORWARD); motorBR.run(FORWARD);
@@ -160,5 +160,7 @@ bool break_is_t_corner()
 
 bool break_is_corner()
 {
+	if(!break_in_line() && is_left_or_right_ir_sensor())
+		
   return true;
 }
