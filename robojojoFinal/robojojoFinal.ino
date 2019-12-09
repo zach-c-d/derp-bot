@@ -1,16 +1,16 @@
 
 // 0---0-----0-----0---0
 // |         |         |                T  |  F  |  RES
-// | |_|_|_| | |_|_|_| |
-// | | | | | | | | | | |                FL          turnSMRight()
+// | |_|_|_| | |_|_|_| |              
+// | | | | | | | | | | |                FL          turnSMRight()       
 // |         |         |                BR
-// 0---0-----0-----0---0
+// 0---0-----0-----0---0                
 // |         |         |                FR          turnSMLeft()
 // | |_|_|_| | |_|_|_| | FL|FM|FR       BL
 // | | | | | | | | | | |    ***
-// |         |         |
-// 0---0-----0-----0---0    *** b
-//                       BL|BM|BR
+// |         |         |    
+// 0---0-----0-----0---0    ***
+//                       BL|BM|BR   
 
 #include <AFMotor.h>
 #include <Servo.h>
@@ -33,15 +33,15 @@
 #define  R     0
 
 //Ultrasonic for Edge Detection
-#define L_EDGE_TRIG 23
+#define L_EDGE_TRIG 23 
 #define L_EDGE_ECHO A9
-#define R_EDGE_TRIG 22
+#define R_EDGE_TRIG 22 
 #define R_EDGE_ECHO A8
 
 //IR Sensors for Obstacle Avoidance
 #define LeftIRSensor 48
 #define RightIRSensor 26
-//#define MiddleIRSensor A10
+//#define MiddleIRSensor A10 
 
 //Front Line Sensor
 #define lineLeft 52
@@ -50,7 +50,7 @@
 
 //Back Line Sensor
 #define TURN_DIST 15
-#define BK_LINE_TRACKER_L 39
+#define BK_LINE_TRACKER_L 39 
 #define BK_LINE_TRACKER_M 35
 #define BK_LINE_TRACKER_R 37
 
@@ -59,7 +59,7 @@
 #define flameDetectLeft A12
 #define flameDetectRight A11
 
-//#define FRONT_TRIG 52
+//#define FRONT_TRIG 52 
 //#define FRONT_ECHO A15
 
 #define SERVO_PIN 10
@@ -94,7 +94,7 @@ inline void turnLeft(){
 inline void turnRight(){
     motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
     motorBL.run(FORWARD); motorBR.run(BACKWARD);
-
+    
 }
 
 inline void forward(){
@@ -115,20 +115,19 @@ inline void stopp(){
 void setup() {
   Serial.begin(9600);
     delay(100);
-  // wait while time of flight module starts up
   while (! Serial) {
     delay(1);
-
+    
   }
   Serial.println("Adafruit VL53L0X test");
   if (!lox.begin()) {
     Serial.println("Failed to boot VL53L0X");
     delay(4000);
   }
-
+   
 
    //Object detection Ultrasonic setup
-//   pinMode(FRONT_ECHO, INPUT);
+//   pinMode(FRONT_ECHO, INPUT); 
 //   pinMode(FRONT_TRIG, OUTPUT);
 
    //Object Detection IR setup
@@ -137,13 +136,13 @@ void setup() {
 //   pinMode(MiddleIRSensor, INPUT)+
 
 
-
-
+;
+   
    neckControllerServoMotor.attach(SERVO_PIN);
    neckControllerServoMotor.write(90);
    delay(100);
    neckControllerServoMotor.detach();
-
+  
    setMotorSpeed(150);
 
 //  tone(50, D);
@@ -179,7 +178,7 @@ void loop() {
    rightDetect = digitalRead(RightIRSensor);
 //  middleDetect = digitalRead(MiddleIRSensor);
 
-
+  
   Serial.print ("Left IR Sensor: " );
     Serial.println (leftDetect);
 
@@ -192,37 +191,37 @@ void loop() {
 
   if (S > 0 && S <= TURN_DIST ) {
     turn();
+  } 
+  
+  
+  //Check if edge         check if very small object is approaching
+  if (leftDetect == 0)
+  {
+    turn(); 
   }
 
-
-  //Check if edge         check if very small object is approaching
-  // if (leftDetect == 0)
-  // {
-  //   turn();
-  // }
-  //
-  // else if (rightDetect == 0)
-  // {
-  //   turn();
-  // }
+  else if (rightDetect == 0)
+  {
+    turn(); 
+  }
 
   //Flame Sensor
   findFire();
-
+  
   //Line Sensor
   moveTrack();
   forward();
   setMotorSpeed(170);
   delay(15);
-
+  
 //  motorFL.run(RELEASE); motorFR.run(RELEASE);
 //  motorBL.run(RELEASE); motorBR.run(RELEASE);
   setMotorSpeed(60);
   delay(10);
 //  setMotorSpeed(50);
 //  delay(5);
-
-
+  
+  
 }
 
 
@@ -233,14 +232,14 @@ void backupAndTurn()
     setMotorSpeed(150);
   //Needs to stop, backup and then turn
   //SHit needs consistency
-  //turns are too large (any way to change)
+  //turns are too large (any way to change) 
   //Backup
 //  leftMotor1.run(5); motorFL.run(5);//5-> stop
 //  motorBR.run(5); motorBL.run(5);
 //  delay(400);
-
+    
   if(lastTurn < millis()){
-
+    
     backward();
     setMotorSpeed(150);
     delay(20);
@@ -262,11 +261,11 @@ void backupAndTurn()
   //Turn left
     backward();
     setMotorSpeed(200);
-
-
+    
+    
     S = readPing();
-
-
+    
+    
     delay(random(50, 100));
     lastTurn = millis() + 900;
 }
@@ -284,13 +283,13 @@ void turn() {
 //  middleDetect = readIRmiddle();
    rightDetect = digitalRead(RightIRSensor);
   while(leftDetect == 0){
-
+    
     backward();
     leftDetect = digitalRead(LeftIRSensor);
     delay(5);
   }
 //  while(middleDetect > 0){
-//
+//    
 //    motorFL.run(BACKWARD); motorFR.run(BACKWARD);
 //    motorBL.run(BACKWARD); motorBR.run(BACKWARD);
 //    delay(5);
@@ -300,7 +299,7 @@ void turn() {
 //    delay(5);
 //  }
   while(rightDetect == 0){
-
+    
     backward();
     rightDetect = digitalRead(RightIRSensor);
     delay(5);
@@ -314,7 +313,7 @@ void turn() {
   delay(300);
   S = readPing();
   Sright = S;
-
+  
   Serial.print("right: ");
   Serial.println(Sright);
   delay(300);
@@ -359,11 +358,11 @@ void turn() {
 }
 void moveTrack(void)
 {
-
+  
   stopp();
   setMotorSpeed(200);
   int temp = 0, num1 = 0, num2 = 0, num3 = 0;
-
+  
   num1 = digitalRead(lineLeft);
   num2 = digitalRead(lineMiddle);
   num3 = digitalRead(lineRight);
@@ -384,12 +383,12 @@ void moveTrack(void)
 //      leftMotor1.setSpeed(0); rightMotor1.setSpeed(0);
 //      leftMotor2.setSpeed(0); rightMotor2.setSpeed(0);
 //      continue;
-//    } else
+//    } else 
     if ( (num1 == 0) && num3 == 1) { //leaning right
       turnLeft();
       delay(40);
       stopp();
-
+      
 //      while (1) {
 //        num2 = digitalRead(lineMiddle);
 //        if (num2) {
@@ -456,7 +455,7 @@ void moveTrack(void)
       stopp();
     }
 
-
+    
   }
 }
 
@@ -474,7 +473,7 @@ void findFire (void)
 
   float fireCloseDistance = 100;  //fire is close
   float fireFarDistance = 600;    //fire is too far, no need to care about it
-
+  
   //Main Principle: find fire, center onto fire and head towards it
   //Robot ignores line tracking while a fire is in sight
   //1. If center is LESS THAN OR EQUAL TO fireCloseDistance, stop robot
@@ -483,13 +482,13 @@ void findFire (void)
   //4. if fire hits left check AND center is LESS THAN fireFarDistance, turn left moving forward
   //5. if fire hits right check AND center is LESS THAN fireFarDistance, turn right moving forward
   //6. if both left AND right check is off, && center is GREATER THAN fireCloseDistance, drive forward
-
+  
   //Check if outside sensors (flameCheckLeft, flameCheckRight) see a fire
-  //IR Digital Sensors:
+  //IR Digital Sensors: 
   //if there is no object. 1 if there is an object
   //Notes: If Left check is only one on, make full turn (no movement) [ vice versa]
   //       If Left check and center "on", make small adjustment and be moving foward [ vice versa ]
-
+  
   //1. If center is LESS THAN OR EQUAL TO 300, stop robot
   while (flameDistanceReading <= fireCloseDistance || flameCheckLeft <= fireCloseDistance || flameCheckRight <= fireCloseDistance)
   {
@@ -527,7 +526,7 @@ void findFire (void)
     delay(50); //big turn to center
     setMotorSpeed(60);
   }
-
+   
   //3. If fire hits the right check, AND center is GREATER THAN fireFarDistance, turn right to center
   if (flameCheckRight < fireFarDistance && flameDistanceReading > fireFarDistance)
   {
@@ -547,8 +546,8 @@ void findFire (void)
     delay(25); //small turn to center
     setMotorSpeed(50);
   }
-
-  //5. if fire hits right check AND center is LESS THAN fireFarDistance, turn right moving forward
+  
+  //5. if fire hits right check AND center is LESS THAN fireFarDistance, turn right moving forward 
   if (flameCheckRight < fireFarDistance && flameDistanceReading <= fireFarDistance)
   {
     //Slight Adjustment (variable speeds) to adjust to the right
@@ -557,13 +556,29 @@ void findFire (void)
     delay(25); //small turn to center
     setMotorSpeed(50);
   }
-
-
+  
+  
 }
 
-void bitchImOnLine(void)
+void lineGapCheck(void)
 {
+//  FCL        FCR
+  //  *          *
+  //       FLT
+  //    FL|FM|FR       
+  //       ***
+  //     
+  //       ***
+  //    BL|BM|BR
+  //       BLT
+  //  *          *
+  // BCL        BCR
 
+  // (FCL && (FLT || BLT)) --> LCorner
+  // (FCR && (FLT || BLT)) --> RCorner
+  // (!FLT && BLT) --> FGap
+  // (FLT && !BLT) --> BGap
+   
 }
 
 void setMotorSpeed(int mSpeed){
@@ -585,22 +600,22 @@ float readPing(void) {
 //  digitalWrite(FRONT_TRIG,HIGH);
 //  delay(0.1);
 //  digitalWrite(FRONT_TRIG,LOW);
-//
+//  
 //  duration = pulseIn(FRONT_ECHO, HIGH);
-//
+//  
 //  value = (duration/2) * 0.0343;
   VL53L0X_RangingMeasurementData_t measure;
 
   lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
   if (measure.RangeStatus != 4) {  // phase failures have incorrect data
     Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
-
+    
     Serial.println(measure.RangeStatus);
-
+    
     value = (measure.RangeMilliMeter / 10);
   } else {
     Serial.println(" out of range ");
-
+    
     Serial.println(measure.RangeStatus);
     value = 100;
   }
