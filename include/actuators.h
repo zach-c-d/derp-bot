@@ -11,9 +11,6 @@
 
 void align_with_line()
 {
-<<<<<<< HEAD
-
-=======
   int temp = 0, num1 = 0, num2 = 0, num3 = 0 num4 = 0, num5 = 0, num6 = 0;
   
   num1 = digitalRead(lineLeft);
@@ -51,14 +48,10 @@ void align_with_line()
       slightLeft();
     }
   }
->>>>>>> 35e6e4c9fc6411a019970c7f0e06486b4b17a44a
 }
 
 void move_forward(int motor_speed)
 {
-<<<<<<< HEAD
-
-=======
     motorFL.run(FORWARD); motorFR.run(FORWARD);
     motorBL.run(FORWARD); motorBR.run(FORWARD);
 	setMotorSpeed(170);
@@ -73,7 +66,6 @@ void slightLeft(){
     motorBL.run(BACKWARD); motorBR.run(FORWARD);
 	delay(10);
 	
->>>>>>> 35e6e4c9fc6411a019970c7f0e06486b4b17a44a
 }
 
 void slightRight){
