@@ -1,6 +1,6 @@
-bool check_fire()
+x`bool check_fire()
 {
-  
+
 }
 bool check_fire_left()
 {
@@ -26,5 +26,3 @@ bool front_line_sensor(){
 bool back_line_sensor(){
 
 }
-
-
