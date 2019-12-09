@@ -50,6 +50,19 @@ void move_forward(int motor_speed)
 	
 }
 
+void slightLeft(){
+	motorFL.run(BACKWARD); motorFR.run(FORWARD); // TURN LEFT
+    motorBL.run(BACKWARD); motorBR.run(FORWARD);
+	delay(10);
+	
+}
+
+void slightRight){
+	motorFL.run(FORWARD); motorFR.run(BACKWARD); // TURN RIGHT
+    motorBL.run(FORWARD); motorBR.run(BACKWARD);
+	delay(10);
+}
+
 void turn_corner(bool turn_left)
 {
   if (turn_left)
